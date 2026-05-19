@@ -1,8 +1,10 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 
+RUN npm install -g pnpm
+
 COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 RUN pnpm run build
@@ -10,6 +12,8 @@ RUN pnpm run build
 FROM node:20-alpine AS final
 WORKDIR /app
 
-COPY --from=build /app/.output ./.output
+RUN npm install -g serve
+
+COPY --from=build /app/dist ./dist
 EXPOSE 3000
-ENTRYPOINT ["node", ".output/server/index.mjs"]
+ENTRYPOINT ["serve", "-s", "dist", "-l", "3000"]
