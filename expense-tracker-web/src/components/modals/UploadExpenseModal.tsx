@@ -188,7 +188,7 @@ export function UploadExpenseModal(props: ExpenseModalProps) {
         {updateProps ? (
           updateProps.trigger
         ) : (
-          <Button className="bg-[#f97316] hover:bg-[#ea580c] text-white font-medium px-5 py-5 rounded-md shadow-[0_4px_15px_rgba(249,115,22,0.2)] transition-all transform hover:-translate-y-0.5 duration-200">
+          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-5 py-5 rounded-md transition-colors duration-200">
             <Plus className="w-4 h-4 mr-2" /> Upload Expense
           </Button>
         )}

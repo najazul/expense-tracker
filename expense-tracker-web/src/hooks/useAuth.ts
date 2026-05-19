@@ -1,4 +1,5 @@
-import { setToken, setStoredUser, clearAuth, type AuthUser } from '../lib/auth'
+import { setToken, setStoredUser, clearAuth } from '../lib/auth'
+import type { AuthUser } from '../lib/auth'
 import { API_BASE } from '../lib/api-client'
 import { useNavigate } from '@tanstack/react-router'
 
@@ -16,7 +17,7 @@ export function useAuth() {
       throw new Error('Authentication failed')
     }
 
-    const data = await response.json() as {
+    const data = (await response.json()) as {
       accessToken: string
       user: AuthUser
     }

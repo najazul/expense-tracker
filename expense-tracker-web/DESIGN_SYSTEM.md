@@ -11,52 +11,52 @@ Inspired by [Browser Use](https://browser-use.com) — a premium dark-first aest
 
 ### Core Colors
 
-| Token                | Hex         | Usage                                      |
-|----------------------|-------------|---------------------------------------------|
-| `--background`       | `#0a0a0a`   | Page / app background                       |
-| `--foreground`       | `#fafafa`   | Primary text on dark backgrounds             |
-| `--card`             | `#111111`   | Card surfaces, sidebar background            |
-| `--card-foreground`  | `#fafafa`   | Text on cards                                |
-| `--popover`          | `#111111`   | Dialog / dropdown backgrounds                |
-| `--popover-foreground`| `#fafafa`  | Text inside popovers                         |
+| Token                  | Hex       | Usage                             |
+| ---------------------- | --------- | --------------------------------- |
+| `--background`         | `#0a0a0a` | Page / app background             |
+| `--foreground`         | `#fafafa` | Primary text on dark backgrounds  |
+| `--card`               | `#111111` | Card surfaces, sidebar background |
+| `--card-foreground`    | `#fafafa` | Text on cards                     |
+| `--popover`            | `#111111` | Dialog / dropdown backgrounds     |
+| `--popover-foreground` | `#fafafa` | Text inside popovers              |
 
 ### Accent & Interactive
 
-| Token                | Hex         | Usage                                      |
-|----------------------|-------------|---------------------------------------------|
-| `--primary`          | `#f97316`   | Primary buttons, CTA, active indicators     |
-| `--primary-foreground`| `#ffffff`  | Text on primary buttons                      |
-| `--secondary`        | `#1c1c1c`   | Secondary buttons, subtle backgrounds        |
-| `--secondary-foreground`| `#a1a1aa`| Text on secondary surfaces                   |
-| `--accent`           | `#1a1a1a`   | Hover states, sidebar active item bg         |
-| `--accent-foreground`| `#fafafa`   | Text on accent backgrounds                   |
+| Token                    | Hex       | Usage                                   |
+| ------------------------ | --------- | --------------------------------------- |
+| `--primary`              | `#f97316` | Primary buttons, CTA, active indicators |
+| `--primary-foreground`   | `#ffffff` | Text on primary buttons                 |
+| `--secondary`            | `#1c1c1c` | Secondary buttons, subtle backgrounds   |
+| `--secondary-foreground` | `#a1a1aa` | Text on secondary surfaces              |
+| `--accent`               | `#1a1a1a` | Hover states, sidebar active item bg    |
+| `--accent-foreground`    | `#fafafa` | Text on accent backgrounds              |
 
 ### Semantic
 
-| Token                | Hex         | Usage                                      |
-|----------------------|-------------|---------------------------------------------|
-| `--destructive`      | `#ef4444`   | Delete actions, error states                 |
-| `--destructive-foreground`| `#fafafa`| Text on destructive elements              |
-| `--muted`            | `#1c1c1c`   | Muted backgrounds (inputs, disabled areas)   |
-| `--muted-foreground` | `#71717a`   | Placeholder text, secondary/muted text       |
+| Token                      | Hex       | Usage                                      |
+| -------------------------- | --------- | ------------------------------------------ |
+| `--destructive`            | `#ef4444` | Delete actions, error states               |
+| `--destructive-foreground` | `#fafafa` | Text on destructive elements               |
+| `--muted`                  | `#1c1c1c` | Muted backgrounds (inputs, disabled areas) |
+| `--muted-foreground`       | `#71717a` | Placeholder text, secondary/muted text     |
 
 ### Borders & Rings
 
-| Token                | Hex         | Usage                                      |
-|----------------------|-------------|---------------------------------------------|
-| `--border`           | `#222222`   | Card borders, dividers, input borders        |
-| `--input`            | `#222222`   | Input field borders                          |
-| `--ring`             | `#f97316`   | Focus ring color (matches primary)           |
+| Token      | Hex       | Usage                                 |
+| ---------- | --------- | ------------------------------------- |
+| `--border` | `#222222` | Card borders, dividers, input borders |
+| `--input`  | `#222222` | Input field borders                   |
+| `--ring`   | `#f97316` | Focus ring color (matches primary)    |
 
 ### Chart Colors (for future data visualization)
 
-| Token        | Hex         |
-|--------------|-------------|
-| `--chart-1`  | `#f97316`   |
-| `--chart-2`  | `#fb923c`   |
-| `--chart-3`  | `#fdba74`   |
-| `--chart-4`  | `#fed7aa`   |
-| `--chart-5`  | `#fff7ed`   |
+| Token       | Hex       |
+| ----------- | --------- |
+| `--chart-1` | `#f97316` |
+| `--chart-2` | `#fb923c` |
+| `--chart-3` | `#fdba74` |
+| `--chart-4` | `#fed7aa` |
+| `--chart-5` | `#fff7ed` |
 
 ---
 
@@ -64,11 +64,11 @@ Inspired by [Browser Use](https://browser-use.com) — a premium dark-first aest
 
 ### Font Families
 
-| Role        | Font                  | Import                                        |
-|-------------|------------------------|-----------------------------------------------|
+| Role              | Font                       | Import                                                         |
+| ----------------- | -------------------------- | -------------------------------------------------------------- |
 | **Headline/Hero** | `Playfair Display` (serif) | Google Fonts: `Playfair+Display:wght@400;700;900&display=swap` |
 | **Body/UI**       | `Inter` (sans-serif)       | Google Fonts: `Inter:wght@300;400;500;600;700&display=swap`    |
-| **Monospace**     | System mono stack          | `ui-monospace, monospace`                     |
+| **Monospace**     | System mono stack          | `ui-monospace, monospace`                                      |
 
 ### Font Usage Rules
 
@@ -103,26 +103,26 @@ body {
 
 ### Border Radius
 
-| Token          | Value    | Usage                  |
-|----------------|----------|------------------------|
-| `--radius`     | `0.5rem` | Default for all components (cards, buttons, inputs, dialogs) |
+| Token      | Value    | Usage                                                        |
+| ---------- | -------- | ------------------------------------------------------------ |
+| `--radius` | `0.5rem` | Default for all components (cards, buttons, inputs, dialogs) |
 
 ### Sidebar
 
-| Property       | Value         |
-|----------------|---------------|
-| Width          | `250px`       |
-| Background     | `var(--card)` / `#111111` |
-| Border right   | `1px solid var(--border)` |
-| Position       | Fixed left, full height   |
+| Property     | Value                     |
+| ------------ | ------------------------- |
+| Width        | `250px`                   |
+| Background   | `var(--card)` / `#111111` |
+| Border right | `1px solid var(--border)` |
+| Position     | Fixed left, full height   |
 
 ### Content Area
 
-| Property       | Value         |
-|----------------|---------------|
-| Max width      | None (fluid, fills remaining space) |
-| Padding        | `2rem` (`p-8`) |
-| Background     | `var(--background)` |
+| Property   | Value                               |
+| ---------- | ----------------------------------- |
+| Max width  | None (fluid, fills remaining space) |
+| Padding    | `2rem` (`p-8`)                      |
+| Background | `var(--background)`                 |
 
 ### Page Structure
 
@@ -148,13 +148,13 @@ All components are **shadcn/ui** — we only override via CSS variables and Tail
 
 ### Buttons
 
-| Variant     | Appearance                                    |
-|-------------|-----------------------------------------------|
-| `default`   | Orange bg (`bg-primary`), white text           |
-| `secondary` | Dark bg (`#1c1c1c`), gray text                |
-| `outline`   | Transparent bg, `border-border`, white text on hover |
-| `ghost`     | Transparent bg, subtle hover (`accent`)        |
-| `destructive`| Red bg (`bg-destructive`), white text         |
+| Variant       | Appearance                                           |
+| ------------- | ---------------------------------------------------- |
+| `default`     | Orange bg (`bg-primary`), white text                 |
+| `secondary`   | Dark bg (`#1c1c1c`), gray text                       |
+| `outline`     | Transparent bg, `border-border`, white text on hover |
+| `ghost`       | Transparent bg, subtle hover (`accent`)              |
+| `destructive` | Red bg (`bg-destructive`), white text                |
 
 **Hover behavior**: Buttons should have a slight brightness increase on hover (`hover:bg-primary/90`).
 
@@ -196,12 +196,12 @@ All components are **shadcn/ui** — we only override via CSS variables and Tail
 
 ### Badges
 
-| Variant     | Appearance                          |
-|-------------|--------------------------------------|
-| `default`   | Orange bg, white text                |
-| `secondary` | Dark muted bg, gray text             |
-| `outline`   | Transparent, bordered, white text    |
-| `destructive`| Red bg, white text                  |
+| Variant       | Appearance                        |
+| ------------- | --------------------------------- |
+| `default`     | Orange bg, white text             |
+| `secondary`   | Dark muted bg, gray text          |
+| `outline`     | Transparent, bordered, white text |
+| `destructive` | Red bg, white text                |
 
 ---
 

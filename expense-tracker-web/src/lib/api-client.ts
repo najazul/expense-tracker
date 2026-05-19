@@ -1,6 +1,6 @@
 import { getAuthHeaders, clearAuth } from './auth'
 
-export const API_BASE = import.meta.env.VITE_API_BASE;
+export const API_BASE = import.meta.env.VITE_API_BASE
 
 export interface RequestOptions {
   method?: string
@@ -8,7 +8,10 @@ export interface RequestOptions {
   headers?: Record<string, string>
 }
 
-export async function apiRequest<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
+export async function apiRequest<T>(
+  endpoint: string,
+  options: RequestOptions = {},
+): Promise<T> {
   const { method = 'GET', body, headers = {} } = options
 
   const isFormData = body instanceof FormData
@@ -26,7 +29,7 @@ export async function apiRequest<T>(endpoint: string, options: RequestOptions = 
   const response = await fetch(`${API_BASE}${endpoint}`, {
     method,
     headers: finalHeaders,
-    body: isFormData ? body : (body ? JSON.stringify(body) : undefined),
+    body: isFormData ? body : body ? JSON.stringify(body) : undefined,
   })
 
   // If unauthorized, clear auth and redirect to login

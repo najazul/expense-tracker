@@ -40,7 +40,6 @@ function Home() {
 
   // Initialize Google Sign-In
   useEffect(() => {
-
     const initGoogleSignIn = () => {
       if (!window.google || !googleBtnRef.current) return
 
@@ -93,7 +92,7 @@ function Home() {
       {/* Header */}
       <header className="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-center border-b border-[#222]/40">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded bg-[#f97316] flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.3)]">
+          <div className="w-8 h-8 rounded bg-[#f97316] flex items-center justify-center">
             <Receipt className="w-4 h-4 text-white" />
           </div>
           <span className="font-bold text-xl tracking-tight font-sans">
@@ -112,14 +111,18 @@ function Home() {
 
         {/* Hero Title */}
         <h1 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.1] mb-6 select-none max-w-3xl">
-          <span className="font-serif block text-white font-normal">THE WAY WE</span>
-          <span className="font-serif block italic font-light text-[#f97316]">track expenses.</span>
+          <span className="font-serif block text-white font-normal">
+            THE WAY WE
+          </span>
+          <span className="font-serif block italic font-light text-[#f97316]">
+            track expenses.
+          </span>
         </h1>
 
         {/* Hero Subtitle */}
         <p className="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed font-light">
-          Track, categorize, and visualize your personal spending.
-          The ultimate minimal command dashboard for any modern workflow.
+          Track, categorize, and visualize your personal spending. The ultimate
+          minimal command dashboard for any modern workflow.
         </p>
 
         {/* Google Sign-In Button */}
