@@ -8,7 +8,4 @@
 **/*.cache
 **/*.tmp
 **/*.log
-**/node_modules/
 appsettings.Development.json
-Dockerfile
-.dockerignore
