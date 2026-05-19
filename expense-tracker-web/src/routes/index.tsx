@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { Receipt, Activity } from 'lucide-react'
+import { Receipt, Activity, Loader2 } from 'lucide-react'
 import { useAuth } from '#/hooks/useAuth'
 
 // Google Identity Services types
@@ -37,6 +37,7 @@ export const Route = createFileRoute('/')({ component: Home })
 function Home() {
   const { googleLogin } = useAuth()
   const googleBtnRef = useRef<HTMLDivElement>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   // Initialize Google Sign-In
   useEffect(() => {
@@ -72,15 +73,29 @@ function Home() {
   }, [])
 
   const handleGoogleResponse = async (response: { credential: string }) => {
+    setIsLoading(true)
     try {
       await googleLogin(response.credential)
     } catch (error) {
       console.error('Login failed:', error)
+      setIsLoading(false)
     }
   }
 
   return (
     <div className="relative min-h-screen bg-[#0a0a0a] text-white flex flex-col justify-between overflow-hidden font-sans">
+      {/* Freezing Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0a0a]/80 backdrop-blur-sm pointer-events-auto select-none">
+          <div className="flex flex-col items-center gap-3">
+            <Loader2 className="w-8 h-8 animate-spin text-[#f97316]" />
+            <div className="text-center">
+              <p className="text-gray-200 text-sm font-medium tracking-wide">Signing you in...</p>
+              <p className="text-gray-500 text-xs mt-1">Please wait a moment</p>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Background Gradients */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.08)_0%,transparent_70%)] blur-[80px]" />
