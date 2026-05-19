@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+**/TestResults/
+**/*.user
+**/*.suo
+**/*.cache
+**/*.tmp
+**/*.log
+**/node_modules/
+appsettings.Development.json
+Dockerfile
+.dockerignore

@@ -2,6 +2,7 @@ using System.Text;
 using Amazon.S3;
 using ExpenseTracker.API.Data;
 using ExpenseTracker.API.Services;
+using ExpenseTracker.API.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -33,11 +34,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-if (string.IsNullOrWhiteSpace(connectionString))
-{
-    throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-}
-
 builder.Services.AddDbContext<ExpenseDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
@@ -53,18 +49,20 @@ var s3Client = new AmazonS3Client(r2Config["AccessKey"], r2Config["SecretKey"], 
 builder.Services.AddSingleton<IAmazonS3>(s3Client);
 builder.Services.AddScoped<IStorageService, R2StorageService>();
 
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() 
+    ?? throw new InvalidOperationException("CORS AllowedOrigins must be configured.");
 // CORS for expense-tracker-web
 builder.Services.AddCors(options =>
-{
+{   
     options.AddDefaultPolicy(policy =>
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
 
+// Actual services the app will use
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -93,3 +91,4 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+

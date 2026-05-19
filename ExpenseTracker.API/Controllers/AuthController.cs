@@ -1,5 +1,6 @@
 using ExpenseTracker.API.Dtos;
 using ExpenseTracker.API.Services;
+using ExpenseTracker.API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTracker.API.Controllers;
@@ -42,3 +43,4 @@ public class AuthController : ControllerBase
         }
     }
 }
+

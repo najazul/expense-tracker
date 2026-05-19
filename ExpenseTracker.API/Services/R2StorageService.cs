@@ -1,3 +1,4 @@
+using ExpenseTracker.API.Interfaces;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Microsoft.AspNetCore.Http;
@@ -60,3 +61,4 @@ public class R2StorageService : IStorageService
         await _s3Client.DeleteObjectAsync(deleteRequest);
     }
 }
+

@@ -1,18 +1,27 @@
-import { HeadContent, Outlet, Scripts, createRootRoute, redirect } from '@tanstack/react-router'
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRoute,
+  redirect,
+} from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { isAuthenticated } from '#/lib/auth'
+import { Toaster } from '#/components/ui/toast'
 
 import appCss from '../styles.css?url'
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => {
-    const isAuth = isAuthenticated()
-    if (!isAuth && location.pathname !== '/') {
-      throw redirect({ to: '/' })
-    }
-    if (isAuth && location.pathname === '/') {
-      throw redirect({ to: '/dashboard' })
+    if (typeof document !== 'undefined') {
+      const isAuth = isAuthenticated()
+      if (!isAuth && location.pathname !== '/') {
+        throw redirect({ to: '/' })
+      }
+      if (isAuth && location.pathname === '/') {
+        throw redirect({ to: '/dashboard' })
+      }
     }
   },
   head: () => ({
@@ -25,13 +34,22 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'ExpenseFlow — Smart Expense Tracking',
+        title: 'Expense Tracker — Smart Expense Tracking',
       },
     ],
     links: [
       {
         rel: 'stylesheet',
         href: appCss,
+      },
+      {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/expense-tracker.svg',
+      },
+      {
+        rel: 'manifest',
+        href: '/manifest.json',
       },
     ],
     scripts: [
@@ -52,7 +70,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <TanStackDevtools
           config={{
@@ -72,5 +90,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />
+  return (
+    <>
+      <Outlet />
+      <Toaster />
+    </>
+  )
 }

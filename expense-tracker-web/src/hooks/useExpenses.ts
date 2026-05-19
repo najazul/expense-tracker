@@ -10,6 +10,16 @@ interface ApiExpense {
   expenseDate: string
 }
 
+function mapApiExpense(expense: ApiExpense): Expense {
+  return {
+    id: expense.id,
+    amount: expense.amount,
+    description: expense.description ?? '',
+    expenseDate: expense.expenseDate,
+    photoUrl: expense.photoUrl,
+  }
+}
+
 export function useExpenses() {
   const [expenses, setExpenses] = useState<Expense[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -18,14 +28,7 @@ export function useExpenses() {
     const fetchExpenses = async () => {
       try {
         const data = await apiRequest<ApiExpense[]>('/api/expenses')
-        const mapped = data.map((d) => ({
-          id: d.id,
-          amount: d.amount,
-          description: d.description ?? '',
-          expenseDate: d.expenseDate,
-          photoUrl: d.photoUrl,
-          status: 'Approved' as const,
-        }))
+        const mapped = data.map((d) => mapApiExpense(d))
         setExpenses(mapped)
       } catch (error) {
         console.error('Failed to fetch expenses:', error)
@@ -53,14 +56,24 @@ export function useCreateExpense() {
       method: 'POST',
       body: formData,
     })
-    return {
-      id: created.id,
-      amount: created.amount,
-      description: created.description ?? '',
-      expenseDate: created.expenseDate,
-      photoUrl: created.photoUrl,
-      status: 'Pending',
-    }
+    return mapApiExpense(created)
   }
   return { createExpense }
+}
+
+export function useUpdateExpense() {
+  const updateExpense = async (
+    id: string,
+    formData: FormData,
+  ): Promise<Expense> => {
+    await apiRequest(`/api/expenses/${id}`, {
+      method: 'PUT',
+      body: formData,
+    })
+
+    const updated = await apiRequest<ApiExpense>(`/api/expenses/${id}`)
+    return mapApiExpense(updated)
+  }
+
+  return { updateExpense }
 }

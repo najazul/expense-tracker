@@ -1,6 +1,6 @@
 using ExpenseTracker.API.Models;
 
-namespace ExpenseTracker.API.Services;
+namespace ExpenseTracker.API.Interfaces;
 
 public interface IExpenseService
 {
@@ -10,3 +10,4 @@ public interface IExpenseService
     Task<bool> UpdateAsync(Expense input, Guid userId);
     Task<bool> DeleteAsync(Guid id, Guid userId);
 }
+

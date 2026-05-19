@@ -1,3 +1,4 @@
+using ExpenseTracker.API.Interfaces;
 using ExpenseTracker.API.Data;
 using ExpenseTracker.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ namespace ExpenseTracker.API.Services;
 
 public class ExpenseService : IExpenseService
 {
+    private const string UntitledReceiptPrefix = "Untitled Receipt";
     private readonly ExpenseDbContext _db;
 
     public ExpenseService(ExpenseDbContext db)
@@ -35,9 +37,12 @@ public class ExpenseService : IExpenseService
 
         input.UserId = userId;
 
-        if (input.ExpenseDate == default)
+        if (string.IsNullOrWhiteSpace(input.Description))
         {
-            input.ExpenseDate = DateTime.UtcNow;
+            var nextNumber = await _db.Expenses.AsNoTracking()
+                .Where(e => e.UserId == userId && e.Description != null && e.Description.StartsWith(UntitledReceiptPrefix))
+                .CountAsync() + 1;
+            input.Description = $"{UntitledReceiptPrefix} {nextNumber}";
         }
 
         _db.Expenses.Add(input);
@@ -56,7 +61,10 @@ public class ExpenseService : IExpenseService
         }
 
         existing.Amount = input.Amount;
-        existing.Description = input.Description;
+        if (!string.IsNullOrWhiteSpace(input.Description))
+        {
+            existing.Description = input.Description;
+        }
         existing.PhotoUrl = input.PhotoUrl;
         existing.ExpenseDate = input.ExpenseDate;
 
@@ -79,3 +87,4 @@ public class ExpenseService : IExpenseService
         return true;
     }
 }
+

@@ -1,6 +1,7 @@
 using ExpenseTracker.API.Dtos;
 using ExpenseTracker.API.Models;
 using ExpenseTracker.API.Services;
+using ExpenseTracker.API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -58,7 +59,7 @@ public class ExpensesController : ControllerBase
             Amount = request.Amount,
             Description = request.Description,
             PhotoUrl = photoUrl,
-            ExpenseDate = request.ExpenseDate ?? default
+            ExpenseDate = request.ExpenseDate
         };
 
         var created = await _service.CreateAsync(expense, GetUserId());
@@ -125,3 +126,4 @@ public class ExpensesController : ControllerBase
         };
     }
 }
+

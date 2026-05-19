@@ -6,9 +6,7 @@ namespace ExpenseTracker.API.Data;
 public class ExpenseDbContext : DbContext
 {
     public ExpenseDbContext(DbContextOptions<ExpenseDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options){}
 
     public DbSet<Expense> Expenses => Set<Expense>();
     public DbSet<User> Users => Set<User>();
@@ -26,7 +24,8 @@ public class ExpenseDbContext : DbContext
             entity.HasOne(e => e.User)
                   .WithMany(u => u.Expenses)
                   .HasForeignKey(e => e.UserId)
-                  .IsRequired(false);
+                  .IsRequired()
+                  .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

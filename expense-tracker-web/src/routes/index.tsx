@@ -91,13 +91,13 @@ function Home() {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-[#222]/40">
+      <header className="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-center border-b border-[#222]/40">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded bg-[#f97316] flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.3)]">
             <Receipt className="w-4 h-4 text-white" />
           </div>
           <span className="font-bold text-xl tracking-tight font-sans">
-            Expense<span className="text-[#f97316]">Flow</span>
+            Expense <span className="text-[#f97316]">Tracker</span>
           </span>
         </div>
       </header>
@@ -118,14 +118,14 @@ function Home() {
 
         {/* Hero Subtitle */}
         <p className="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed font-light">
-          Track, categorize, and visualize your personal or team spending. 
+          Track, categorize, and visualize your personal spending.
           The ultimate minimal command dashboard for any modern workflow.
         </p>
 
         {/* Google Sign-In Button */}
         <div className="flex flex-col items-center gap-4">
-          <div 
-            ref={googleBtnRef} 
+          <div
+            ref={googleBtnRef}
             id="google-signin-btn"
             className="min-h-[44px]"
           />
