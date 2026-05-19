@@ -15,4 +15,4 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 COPY --from=build /app/dist ./dist
 EXPOSE 3000
-ENTRYPOINT ["node", "dist/server/server.js"]
+ENTRYPOINT ["node", "--trace-warnings", "dist/server/server.js"]
