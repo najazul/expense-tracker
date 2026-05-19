@@ -6,10 +6,9 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite --port 3000",
     "build": "vite build",
-    "start": "node dist/server/server.js",
-    "preview": "vite preview",
+    "preview": "vite preview --port 3000 --host 0.0.0.0",
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier --write . && eslint --fix",
@@ -25,8 +24,6 @@
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-router": "latest",
     "@tanstack/react-router-devtools": "latest",
-    "@tanstack/react-router-ssr-query": "latest",
-    "@tanstack/react-start": "latest",
     "@tanstack/router-plugin": "^1.132.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
