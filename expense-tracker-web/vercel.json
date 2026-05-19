@@ -1,0 +1,11 @@
+{
+  "framework": null,
+  "buildCommand": "pnpm build",
+  "outputDirectory": ".output/public",
+  "devCommand": "pnpm dev",
+  "functions": {
+    "api/server.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
+}
