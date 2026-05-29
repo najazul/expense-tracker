@@ -91,7 +91,9 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Ping to prevent inactivity timeout
-app.MapGet("/health", () => "ok");
+app.MapGet("/health", async (ExpenseDbContext db) =>
+    await db.Database.CanConnectAsync() ? "ok" : "not ok"
+);
 
 app.Run();
 
