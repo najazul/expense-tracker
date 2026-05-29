@@ -1,4 +1,4 @@
-# Corporate Expense Tracker
+# Expense Tracker
 
 A high-performance, containerized, and modern Corporate Expense Tracker built as a standard client-side Single Page Application connected to a secure .NET 10 Web API.
 
