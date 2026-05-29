@@ -23,17 +23,25 @@ public class AuthService : IAuthService
 
     public async Task<(User user, string token)> AuthenticateWithGoogleAsync(string googleIdToken)
     {
-        // Validate the Google ID token
+        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+        // 1. Validate the Google ID token
         var googleClientId = _config["GoogleAuth:ClientId"];
         var settings = new GoogleJsonWebSignature.ValidationSettings
         {
             Audience = new[] { googleClientId }
         };
 
+        Console.WriteLine("[Auth] Starting Google Token validation...");
         var payload = await GoogleJsonWebSignature.ValidateAsync(googleIdToken, settings);
+        Console.WriteLine($"[Auth] Google Token validation complete. Took {stopwatch.ElapsedMilliseconds}ms");
+        stopwatch.Restart();
 
-        // Find or create the user
+        // 2. Find or create the user in Database
+        Console.WriteLine("[Auth] Finding user in DB...");
         var user = await _db.Users.FirstOrDefaultAsync(u => u.GoogleId == payload.Subject);
+        Console.WriteLine($"[Auth] DB Query complete. Took {stopwatch.ElapsedMilliseconds}ms");
+        stopwatch.Restart();
 
         if (user is null)
         {
@@ -56,7 +64,10 @@ public class AuthService : IAuthService
             user.PictureUrl = payload.Picture;
         }
 
+        Console.WriteLine("[Auth] Saving user to DB...");
         await _db.SaveChangesAsync();
+        Console.WriteLine($"[Auth] DB SaveChangesAsync complete. Took {stopwatch.ElapsedMilliseconds}ms");
+        stopwatch.Stop();
 
         // Generate JWT
         var token = GenerateJwt(user);
